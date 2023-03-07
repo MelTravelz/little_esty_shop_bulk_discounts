@@ -44,7 +44,7 @@ RSpec.describe '/merchant/:merchant_id', type: :feature do
   end
 
   it 'shows the merchant name' do
-    expect(page).to have_content(@merchant1.name)
+    expect(page).to have_content("#{@merchant1.name} Dashboard Page")
   end
 
   it 'can see a link to my merchant items index' do
