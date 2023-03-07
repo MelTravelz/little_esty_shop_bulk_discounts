@@ -16,7 +16,7 @@ class InvoiceItem < ApplicationRecord
     Invoice.order(created_at: :asc).find(invoice_ids)
   end
 
-  def applied_bd_title(merchant)
+  def applied_bd_title(merchant) 
     bulk_discounts
       .where("bulk_discounts.quantity_threshold <= ?", self.quantity)
       .where("bulk_discounts.merchant_id = ?", merchant.id)
