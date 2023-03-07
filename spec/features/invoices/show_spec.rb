@@ -120,7 +120,7 @@ RSpec.describe 'merchant/:merchant_id/invoices', type: :feature do
 
     # User Story 7 (#applied_bulk_discount)
     it "next to each invoice item, I see a link to the show page for the bulk discount that was applied (if any)" do 
-      expect(page).to have_content("See Applied Bulk Discount")
+      expect(page).to have_content("See Applied Discount")
       
       within "#inv_item-#{@ii_1.id}" do
         expect(page).to have_link("Basic", href: "/merchant/#{@merchant1.id}/bulk_discounts/#{@bd_basic.id}")
