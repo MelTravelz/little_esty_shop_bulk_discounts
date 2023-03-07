@@ -38,13 +38,14 @@ RSpec.describe Invoice, type: :model do
         #ii_4 (merchant2) & will not influence `merch_discount_amount` for merchant1 & qualifies for 1 discount: "Mega"
       @ii_4 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_4.id, quantity: 40, unit_price: 1.33, status: 1)
 
-        # This entire invoice will have NO discounts applied -> edge case: dealing with nil values
+        # edge case: dealing with nil values -> This entire invoice will have NO discounts applied 
       @invoice_55 = Invoice.create!(customer_id: @customer_1.id, status: 2, created_at: "2012-03-27 14:54:08")
       @ii_55 = InvoiceItem.create!(invoice_id: @invoice_55.id, item_id: @item_2.id, quantity: 1, unit_price: 10, status: 1)
 
       @bd_basic = @merchant1.bulk_discounts.create!(title: "Basic", percentage_discount: 0.1, quantity_threshold: 5)
       @bd_super = @merchant1.bulk_discounts.create!(title: "Super", percentage_discount: 0.25, quantity_threshold: 10)
       @bd_seasonal = @merchant1.bulk_discounts.create!(title: "Seasonal", percentage_discount: 0.05, quantity_threshold: 5) 
+        # edge case -> if merchant 2 has a discount it will not be counted in merchant1 `merch_discount_amount` method
       @bd_mega = @merchant2.bulk_discounts.create!(title: "Mega", percentage_discount: 0.5, quantity_threshold: 20)
     end
 
@@ -63,12 +64,16 @@ RSpec.describe Invoice, type: :model do
     # User Story 6
     it "#merch_total_revenue (for only 1 merchant on the invoice)" do
       expect(@invoice_1.merch_total_revenue(@merchant1)).to eq(172.0)
+      expect(@invoice_1.merch_total_revenue(@merchant2)).to eq(53.2)
+
       expect(@invoice_55.merch_total_revenue(@merchant1)).to eq(10.0)
     end
 
     # User Story 6 (so see total discounted revenue for a merchant, visit invoices_controller.rb & invoices/show.html.erb)
     it "#merch_discount_amount (for only 1 merchant on the invoice)" do
       expect(@invoice_1.merch_discount_amount(@merchant1)).to eq(27)
+      expect(@invoice_1.merch_discount_amount(@merchant2)).to eq(26.6)
+
       expect(@invoice_55.merch_discount_amount(@merchant1)).to eq(0)
     end
   end
