@@ -13,6 +13,6 @@
 <h1>Upcoming Holidays</h1>
 <ul>
   <% @nager_holidays.each do |holiday| %>
-    <li><%= holiday[:name] %> - <%= holiday[:date] %></li>
+    <li><%= holiday[:name] %>: <%= holiday[:date] %></li>
   <% end %>
 </ul>

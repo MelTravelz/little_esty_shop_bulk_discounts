@@ -22,6 +22,16 @@ RSpec.describe 'merchant/:merchant_id/bulk_discounts/:bulk_discount_id', type: :
       expect(page).to_not have_content("#{@bd_mega.title}")
     end
 
+    # EXTRA
+    it "I see a link to return to the merchants bulk discount index page" do
+      expect(page).to have_link("See All Discounts for Merchant")
+
+      click_link("See All Discounts for Merchant", href: merchant_bulk_discounts_path(@merchant1))
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
+      expect(page).to have_content("All Available Bulk Discounts")
+    end
+
     # User Story 5
     it "I see a link to edit the bulk discount" do
       expect(page).to have_link("Edit this Bulk Discount", href: edit_merchant_bulk_discount_path(@merchant1, @bd_basic))
