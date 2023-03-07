@@ -23,7 +23,7 @@ class Invoice < ApplicationRecord
       .where("invoice_items.quantity >= bulk_discounts.quantity_threshold")
       .group(:id)
     query2 = InvoiceItem.from(query1, :query1)
-      .select("SUM(query1.discount_amount) AS total_discount_amount")
+      .select("COALESCE(SUM(query1.discount_amount), 0) AS total_discount_amount")
       .take
     query2.total_discount_amount
       #above is using Subquery, below is using Ruby: 
@@ -47,7 +47,7 @@ class Invoice < ApplicationRecord
       .group(:id)
     query2 = InvoiceItem
       .from(query1, :query1)
-      .select("SUM(query1.discount_amount) AS merch_discount_amount")
+      .select("COALESCE(SUM(query1.discount_amount), 0) AS merch_discount_amount")
       .take
     query2.merch_discount_amount
   end

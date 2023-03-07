@@ -121,16 +121,14 @@ RSpec.describe '/merchant/:merchant_id', type: :feature do
     expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %-d, %Y"))
   end
 
-  context "As a merchant, when I visit my merchant dashboard" do
-    # User Story 1
-    it "I see a link to view all my bulk discounts" do
-      expect(page).to have_link("Bulk Discounts", href: "/merchant/#{@merchant1.id}/bulk_discounts")
-    end
-
-    # User Story 1
-    it "I click on that link & I'm taken to the bulk discounts index page" do
-      click_link("Bulk Discounts")
-      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1.id))
-    end  
+  # User Story 1
+  it "I see a link to view all my bulk discounts" do
+    expect(page).to have_link("Bulk Discounts", href: merchant_bulk_discounts_path(@merchant1))
   end
+
+  # User Story 1
+  it "I click on that link & I'm taken to the bulk discounts index page" do
+    click_link("Bulk Discounts")
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1.id))
+  end  
 end
