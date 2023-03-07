@@ -5,16 +5,30 @@
 [Melony Franchini](https://github.com/MelTravelz)<br>
 
 ### Descirption of Project
+This project, entitled "Bulk Discounts" is an extention of a previous project named "Little Esty Shop." This is the Turing BE-Mod2, Final Solo Project focusing on designing an e-commerce platform that applies discounts to a specific merchant's items. It's funcitonality would allow merchants as well as admins to manage inventory & fill customers orders. 
 
+The project was complete using `Ruby on Rails` and `PostgreSQL` for the database, `Heroku` for app deployment to the web, and `Nager` for the API consumption. The app [Postman](https://web.postman.co/) was also used to test-write queries in SQL before translating them into ActiveRecord.
 
+New concepts learned during the course of this project included: 
+- deploying the entire project to Heroku along with the `rake tasks`,
+- creating complex `ActiveRecord` queries to the database,
+- consuming one `API` to serve data to the site.
 
 ### Summary of all Works Completed
-
-
+Step 1: GitHub & Setup
+Step 2: Heroku Setup
+Step 3: Design the Schema 
+Step 4: Create Tables & Associations
+Step 5: User Stories 1 - 8 
+Step 6: User Story 9 (API)
+Step 7: Refactor
+Step 8: Final Heroku Deployment
 
 ### Ideas for Potential Future Contributors
+Future contributors should first consider rewriting many of the original tests, as they could be more robust. Reorganizing the directories in the app and spec directories might be considered since many of the files (and their routes) belong to a merchant. Lastly, if routes were to be RESTful, they would need to change '/merchant' to the plural '/merchants'. 
 
-
+### Project Schema
+![bulk_discounts_schema](app/assets/images/bulk_discounts_schema.png)
 
 ### Completed User Stories:
 #### 1: Merchant Bulk Discounts Index
