@@ -42,14 +42,13 @@ class BulkDiscountsController < ApplicationController
     new_params = bulk_discount_params
     new_params[:percentage_discount] = (new_params[:percentage_discount].to_f/100)
  
-    if @bulk_discount.update!(new_params)
-      flash.notice = "Your bulk discount was successfully edited!"
-      redirect_to merchant_bulk_discount_path(@merchant, @bulk_discount)
-    else
-      # Not sure if this is necessary since all fields are required & it'll never allow errors??
-      flash.notice = new_bd.errors.full_messages.join(", ")
-      redirect_to edit_merchant_bulk_discount_path(@merchant, @bulk_discount)
-    end
+    @bulk_discount.update!(new_params)
+    flash.notice = "Your bulk discount was successfully edited!"
+    redirect_to merchant_bulk_discount_path(@merchant, @bulk_discount)
+    #   # Not sure if this is necessary since all fields are required & it'll never allow errors??
+    #   # Could add if conditional if it was needed
+    #   flash.notice = new_bd.errors.full_messages.join(", ")
+    #   redirect_to edit_merchant_bulk_discount_path(@merchant, @bulk_discount)
   end
 
   def destroy
