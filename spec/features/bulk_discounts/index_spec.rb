@@ -45,6 +45,18 @@ RSpec.describe 'merchant/:merchant_id/bulk_discounts', type: :feature do
       expect(page).to have_content("Quantity Threshold (for same item): #{@bd_basic.quantity_threshold}")
     end
 
+    # EXTRA
+    it "I see a link to reaturn to the merchant dashboard page" do
+      expect(page).to have_link("Merchant Dashboard")
+      
+      click_link("Merchant Dashboard")
+
+      expect(current_path).to eq(merchant_dashboard_index_path(@merchant1))
+
+      expect(page).to have_content("#{@merchant1.name} Dashboard Page")
+    end
+
+
     # User Story 2
     it "I see a link to create a new bulk discount, click it & I'm taken to a bulk discount new page" do 
       expect(page).to have_link("Create New Bulk Discount", href: new_merchant_bulk_discount_path(@merchant1))
