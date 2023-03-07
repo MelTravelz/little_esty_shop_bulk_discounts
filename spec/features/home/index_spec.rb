@@ -6,7 +6,7 @@ RSpec.describe '/', type: :feature do
   end 
 
   it "should display project title & links to admin pages" do
-    expect(page).to have_content("Welcome to Project: Little Esty Shop BULK DISCOUNTS")
+    expect(page).to have_content("Project: Little Esty Shop BULK DISCOUNTS")
     expect(page).to have_link("Admin Dashboard", href: admin_dashboard_index_path)
     expect(page).to have_link("Admin Merchants Index Page", href: admin_merchants_path)
     expect(page).to have_link("Admin Invoices Index Page", href: admin_invoices_path)
